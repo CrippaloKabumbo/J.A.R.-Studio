@@ -4,29 +4,54 @@ using UnityEngine;
 
 public class NPCInteraction : MonoBehaviour
 {
-    // setting the interact key
-    public KeyCode interactionKey = KeyCode.Space;
-    // Start is called before the first frame update
+    public KeyCode interactionKey = KeyCode.Space; // Set your interact key here
+    private DialogueManager dialogueManager;
 
-    // Update is called once per frame
+    private void Start()
+    {
+        dialogueManager = FindObjectOfType<DialogueManager>();
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            // Show the first dialogue panel when the player enters the trigger
+            if (dialogueManager != null && dialogueManager.firstDialoguePanel != null)
+            {
+                dialogueManager.firstDialoguePanel.SetActive(true);
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            // Hide the first dialogue panel when the player exits the trigger
+            if (dialogueManager != null && dialogueManager.firstDialoguePanel != null)
+            {
+                dialogueManager.firstDialoguePanel.SetActive(false);
+            }
+        }
+    }
+
     void Update()
     {
         // Check interaction key press
-        if (Input.GetKeyDown(interactionKey))
+        if (Input.GetKeyDown(interactionKey) && dialogueManager.firstDialoguePanel.activeSelf)
         {
-            // check player interaction
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.zero);
-
-            if (hit.collider != null && hit.collider.CompareTag("Player"))
-            {
-                Interact();
-            }
+            // Start the dialogue when the interaction key is pressed
+            dialogueManager.StartDialogue();
         }
 
-    }
-    void Interact()
-    {
-        // Logic for interacting with the NPC
-        Debug.Log("Interacted with NPC: " + gameObject.name);
+        // Check for exit key press to close dialogue
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (dialogueManager.secondDialoguePanel.activeSelf)
+            {
+                dialogueManager.EndDialogue();
+            }
+        }
     }
 }

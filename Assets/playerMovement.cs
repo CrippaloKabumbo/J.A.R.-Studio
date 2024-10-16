@@ -8,6 +8,7 @@ public class playerMovement : MonoBehaviour
     private Vector2 movement;
     private float move;
     public float speed;
+    public bool isInDialogue = false; // Track if the player is in dialogue
     private Animator animator;
     // Start is called before the first frame update
     void Start()
@@ -33,6 +34,9 @@ public class playerMovement : MonoBehaviour
     }
     void FixedUpdate()
     {
+        if (!isInDialogue)
+        { 
         rb.velocity = new Vector2(move * speed, rb.velocity.y);
+        }
     }
 }
