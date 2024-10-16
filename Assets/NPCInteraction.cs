@@ -16,7 +16,7 @@ public class NPCInteraction : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            // Show the first dialogue panel when the player enters the trigger
+            // Show first dialogue panel when player enters box
             if (dialogueManager != null && dialogueManager.firstDialoguePanel != null)
             {
                 dialogueManager.firstDialoguePanel.SetActive(true);
@@ -28,7 +28,7 @@ public class NPCInteraction : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            // Hide the first dialogue panel when the player exits the trigger
+            // Hide first dialogue panel when player exits the box
             if (dialogueManager != null && dialogueManager.firstDialoguePanel != null)
             {
                 dialogueManager.firstDialoguePanel.SetActive(false);
@@ -41,11 +41,11 @@ public class NPCInteraction : MonoBehaviour
         // Check interaction key press
         if (Input.GetKeyDown(interactionKey) && dialogueManager.firstDialoguePanel.activeSelf)
         {
-            // Start the dialogue when the interaction key is pressed
+            // Start dialogue when interaction key is pressed
             dialogueManager.StartDialogue();
         }
 
-        // Check for exit key press to close dialogue
+        // Check exit key press to close dialogue
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (dialogueManager.secondDialoguePanel.activeSelf)
