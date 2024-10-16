@@ -9,7 +9,7 @@ public class NPCInteraction : MonoBehaviour
 
     private void Start()
     {
-        dialogueManager = FindObjectOfType<DialogueManager>();
+        dialogueManager = GetComponentInChildren<DialogueManager>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
