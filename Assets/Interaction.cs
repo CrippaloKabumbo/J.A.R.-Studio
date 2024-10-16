@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NPCInteraction : MonoBehaviour
+public class Interaction : MonoBehaviour
 {
     public KeyCode interactionKey = KeyCode.Space; // Set your interact key here
     private DialogueManager dialogueManager;
