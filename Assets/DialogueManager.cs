@@ -6,7 +6,7 @@ public class DialogueManager : MonoBehaviour
 {
     public GameObject firstDialoguePanel;  // Assign Panel 1
     public GameObject secondDialoguePanel; // Assign Panel 2
-    private playerMovement playerMovement; // Reference to playerMovement script
+    private player player; // Reference to player script
 
     private void Start()
     {
@@ -15,7 +15,7 @@ public class DialogueManager : MonoBehaviour
         secondDialoguePanel.SetActive(false);
 
         
-        playerMovement = FindObjectOfType<playerMovement>();
+        player = FindObjectOfType<player>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -43,9 +43,9 @@ public class DialogueManager : MonoBehaviour
         {
             firstDialoguePanel.SetActive(false);
             secondDialoguePanel.SetActive(true);
-            if (playerMovement != null)
+            if (player != null)
             {
-                playerMovement.isInDialogue = true; // Set dialogue state
+                player.isInDialogue = true; // Set dialogue state
             }
         }
     }
@@ -56,9 +56,9 @@ public class DialogueManager : MonoBehaviour
         if (secondDialoguePanel != null) 
         {
             secondDialoguePanel.SetActive(false);
-            if (playerMovement != null)
+            if (player != null)
             {
-                playerMovement.isInDialogue = false; // Reset dialogue state
+                player.isInDialogue = false; // Reset dialogue state
             }
         }
     }
